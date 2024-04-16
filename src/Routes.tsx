@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Frontlayout from './components/layouts/Frontlayout';
 import Home from './pages/home/Home';
 
-const MyRoutes = () => {
+const AppRoutes = () => {
   return (
     <Routes>
       <Route
@@ -18,4 +18,4 @@ const MyRoutes = () => {
   );
 };
 
-export default MyRoutes;
+export default AppRoutes;
