@@ -1,8 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import useOutSideClick from './useOutSideClick';
 
 const Navbar = () => {
+  // สร้างตัวแปร state เก็บสถานะของ การแสดง / ซ่อน menu
+  const [isOn, setIsOn] = useState(false);
+  // สร้างตัวแปร state ไว้แสดง menu เมื่อคลิกด้านนอก menu
+  const ref = useRef<HTMLDivElement>(null);
+
+  useOutSideClick(ref, () => {
+    setIsOn(false);
+  });
+  // สร้าง function เพื่อแสดง / ซ่อน menu
+
   return (
     <nav className="bg-gray-800 fixed w-full z-20">
       <div className="container mx-auto px-2 sm:px-6 lg:px-8">
@@ -78,51 +89,87 @@ const Navbar = () => {
               <div className="flex space-x-4">
                 <NavLink
                   to="/"
-                  className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  className={({ isActive }) =>
+                    `text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ${
+                      isActive ? 'bg-green-500' : ''
+                    }`
+                  }
                 >
                   Home
                 </NavLink>
                 <NavLink
                   to="/about"
-                  className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  className={({ isActive }) =>
+                    `text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ${
+                      isActive ? 'bg-green-500' : ''
+                    }`
+                  }
                 >
                   About
                 </NavLink>
                 <NavLink
                   to="/teams"
-                  className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  className={({ isActive }) =>
+                    `text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ${
+                      isActive ? 'bg-green-500' : ''
+                    }`
+                  }
                 >
                   Teams
                 </NavLink>
                 <NavLink
                   to="/projects"
-                  className="text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  className={({ isActive }) =>
+                    `text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ${
+                      isActive ? 'bg-green-500' : ''
+                    }`
+                  }
                 >
                   Projects
                 </NavLink>
 
-                <div className="relative">
+                <div ref={ref} className="relative">
                   {/* Item active: "text-gray-900", Item inactive: "text-gray-500" */}
                   <button
                     type="button"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 inline-flex rounded-md text-sm font-medium"
                     aria-expanded="false"
+                    onClick={() => {
+                      setIsOn(!isOn);
+                    }}
                   >
                     <span>More</span>
-                    <svg
-                      className="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 15l7-7 7 7"
-                      />
-                    </svg>
+                    {isOn ? (
+                      <svg
+                        className="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M5 15l7-7 7 7"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        className="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={1.5}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                        />
+                      </svg>
+                    )}
                   </button>
 
                   {/*
@@ -135,7 +182,11 @@ const Navbar = () => {
                       To: "opacity-0 translate-y-1"
                 */}
 
-                  <div className="block absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0">
+                  <div
+                    className={`${
+                      isOn ? 'block' : 'hidden'
+                    } absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0`}
+                  >
                     <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                       <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                         <a
