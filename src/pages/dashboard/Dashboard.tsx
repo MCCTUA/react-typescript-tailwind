@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import BaseService from '../../services/base.service';
 import Products from '../../models/Product';
