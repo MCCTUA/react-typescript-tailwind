@@ -1,23 +1,14 @@
-import Products from '../models/Product'
-import axios from 'axios'
+import axios from 'axios';
+import { Product } from '../models/Product';
 
 export default class BaseService {
+  private static baseURL: string = 'http://localhost:1337/api/';
 
-    private static baseURL: string = 'http://localhost:1337/'
-
-    // Get All Product
-    public static async getAll<T>(url: string): Promise<Products[]> {
-
-        let res = await axios.get<Array<T>>(this.baseURL + url)
-        .then(response => {
-            return response.data;
-        }).catch(function(error){
-            return error;
-        });
-
-        return res;
-    }
-
+  public static async getAll<T>(url: string): Promise<Product[]> {
+    const response = await axios.get(`${this.baseURL}${url}`);
+    return response.data.data as Product[]; // ทำให้แน่ใจว่าข้อมูลถูกแปลงประเภทอย่างถูกต้อง
+  }
+    
     // Get Product By ID
 
     // Post new Product
@@ -25,5 +16,33 @@ export default class BaseService {
     // Edit Product
 
     // Delete Porject
-
 }
+
+
+// interface ApiResponse<T> {
+//     data: T;
+//     meta?: {
+//         pagination: {
+//             page: number;
+//             pageSize: number;
+//             pageCount: number;
+//             total: number;
+//         }
+//     }
+// }
+
+// export default class BaseService {
+
+//     private static baseURL: string = 'http://localhost:1337/api/'
+
+//     // Get All Product
+//     public static async getAll<T>(url: string): Promise<ApiResponse<T>> {
+
+//          try {
+//             const response = await axios.get<ApiResponse<T>>(this.baseURL + url);
+//             return response.data; // ส่งกลับข้อมูลในรูปแบบที่ต้องการ
+//         } catch (error) {
+//             throw error;
+//         }
+//     }
+// }

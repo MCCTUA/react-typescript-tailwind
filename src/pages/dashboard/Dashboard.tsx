@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import BaseService from '../../services/base.service';
-import Products from '../../models/Product';
+import { Product } from '../../models/Product';
 
 const Dashboard = () => {
-  const [product, setProduct] = useState<Products[]>([]);
+  const [product, setProduct] = useState<Product[]>([]);
 
   useEffect(() => {
-    BaseService.getAll<Products>('products').then((res) => {
-      // console.log(res);
+    BaseService.getAll<Product[]>('products').then((res) => {
+      console.log('res products :', res);
       setProduct(res);
     });
   }, []);
@@ -25,18 +25,13 @@ const Dashboard = () => {
         </thead>
 
         <tbody>
-          <tr>
-            <td> id 1</td>
-            <td> tile 1</td>
-            <td> 100 </td>
-          </tr>
-          {/* {product.map((prd) => (
+          {product.map((prd) => (
             <tr key={prd.id}>
               <td>{prd.id}</td>
-              <td>{prd.title}</td>
-              <td>{prd.price}</td>
+              <td>{prd.attributes.title}</td>
+              <td>{prd.attributes.price}</td>
             </tr>
-          ))} */}
+          ))}
         </tbody>
       </table>
     </div>

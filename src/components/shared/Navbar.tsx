@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Transition } from '@headlessui/react';
 import useOutSideClick from './useOutSideClick';
 
 const Navbar = () => {
@@ -133,7 +134,6 @@ const Navbar = () => {
                 >
                   Projects
                 </NavLink>
-
                 <div ref={ref} className="relative">
                   {/* Item active: "text-gray-900", Item inactive: "text-gray-500" */}
                   <button
@@ -188,178 +188,190 @@ const Navbar = () => {
                       To: "opacity-0 translate-y-1"
                 */}
 
-                  <div
-                    className={`${
-                      isOn ? 'block' : 'hidden'
-                    } absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0`}
+                  <Transition
+                    show={isOn}
+                    enter="transition ease-out duration-200"
+                    enterFrom="opacity-0 translate-y-1"
+                    enterTo="opacity-100 translate-y-0"
+                    leave="transition ease-in duration-150"
+                    leaveFrom="opacity-100 translate-y-0"
+                    leaveTo="opacity-0 translate-y-1"
                   >
-                    <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                      <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                        <a
-                          href="#"
-                          className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
-                        >
-                          {/* Heroicon name: outline/support */}
-                          <svg
-                            className="flex-shrink-0 h-6 w-6 text-indigo-600"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-                            />
-                          </svg>
-                          <div className="ml-4">
-                            <p className="text-base font-medium text-gray-900">
-                              Help Center
-                            </p>
-                            <p className="mt-1 text-sm text-gray-500">
-                              Get all of your questions answered in our forums
-                              or contact support.
-                            </p>
+                    {
+                      <div
+                        className={`${
+                          isOn ? 'block' : 'hidden'
+                        } absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0`}
+                      >
+                        <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                          <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                            <a
+                              href="#"
+                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                            >
+                              {/* Heroicon name: outline/support */}
+                              <svg
+                                className="flex-shrink-0 h-6 w-6 text-indigo-600"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+                                />
+                              </svg>
+                              <div className="ml-4">
+                                <p className="text-base font-medium text-gray-900">
+                                  Help Center
+                                </p>
+                                <p className="mt-1 text-sm text-gray-500">
+                                  Get all of your questions answered in our
+                                  forums or contact support.
+                                </p>
+                              </div>
+                            </a>
+                            <a
+                              href="#"
+                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                            >
+                              {/* Heroicon name: outline/bookmark-alt */}
+                              <svg
+                                className="flex-shrink-0 h-6 w-6 text-indigo-600"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                />
+                              </svg>
+                              <div className="ml-4">
+                                <p className="text-base font-medium text-gray-900">
+                                  Guides
+                                </p>
+                                <p className="mt-1 text-sm text-gray-500">
+                                  Learn how to maximize our platform to get the
+                                  most out of it.
+                                </p>
+                              </div>
+                            </a>
+                            <a
+                              href="#"
+                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                            >
+                              {/* Heroicon name: outline/calendar */}
+                              <svg
+                                className="flex-shrink-0 h-6 w-6 text-indigo-600"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                />
+                              </svg>
+                              <div className="ml-4">
+                                <p className="text-base font-medium text-gray-900">
+                                  Events
+                                </p>
+                                <p className="mt-1 text-sm text-gray-500">
+                                  See what meet-ups and other events we might be
+                                  planning near you.
+                                </p>
+                              </div>
+                            </a>
+                            <a
+                              href="#"
+                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                            >
+                              {/* Heroicon name: outline/shield-check */}
+                              <svg
+                                className="flex-shrink-0 h-6 w-6 text-indigo-600"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                                />
+                              </svg>
+                              <div className="ml-4">
+                                <p className="text-base font-medium text-gray-900">
+                                  Security
+                                </p>
+                                <p className="mt-1 text-sm text-gray-500">
+                                  Understand how we take your privacy seriously.
+                                </p>
+                              </div>
+                            </a>
                           </div>
-                        </a>
-                        <a
-                          href="#"
-                          className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
-                        >
-                          {/* Heroicon name: outline/bookmark-alt */}
-                          <svg
-                            className="flex-shrink-0 h-6 w-6 text-indigo-600"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                            />
-                          </svg>
-                          <div className="ml-4">
-                            <p className="text-base font-medium text-gray-900">
-                              Guides
-                            </p>
-                            <p className="mt-1 text-sm text-gray-500">
-                              Learn how to maximize our platform to get the most
-                              out of it.
-                            </p>
-                          </div>
-                        </a>
-                        <a
-                          href="#"
-                          className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
-                        >
-                          {/* Heroicon name: outline/calendar */}
-                          <svg
-                            className="flex-shrink-0 h-6 w-6 text-indigo-600"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                            />
-                          </svg>
-                          <div className="ml-4">
-                            <p className="text-base font-medium text-gray-900">
-                              Events
-                            </p>
-                            <p className="mt-1 text-sm text-gray-500">
-                              See what meet-ups and other events we might be
-                              planning near you.
-                            </p>
-                          </div>
-                        </a>
-                        <a
-                          href="#"
-                          className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
-                        >
-                          {/* Heroicon name: outline/shield-check */}
-                          <svg
-                            className="flex-shrink-0 h-6 w-6 text-indigo-600"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                            />
-                          </svg>
-                          <div className="ml-4">
-                            <p className="text-base font-medium text-gray-900">
-                              Security
-                            </p>
-                            <p className="mt-1 text-sm text-gray-500">
-                              Understand how we take your privacy seriously.
-                            </p>
-                          </div>
-                        </a>
-                      </div>
-                      <div className="px-5 py-5 bg-gray-50 sm:px-8 sm:py-8">
-                        <div>
-                          <h3 className="text-sm tracking-wide font-medium text-gray-500 uppercase">
-                            Recent Posts
-                          </h3>
-                          <ul className="mt-4 space-y-4">
-                            <li className="text-base truncate">
+                          <div className="px-5 py-5 bg-gray-50 sm:px-8 sm:py-8">
+                            <div>
+                              <h3 className="text-sm tracking-wide font-medium text-gray-500 uppercase">
+                                Recent Posts
+                              </h3>
+                              <ul className="mt-4 space-y-4">
+                                <li className="text-base truncate">
+                                  <a
+                                    href="#"
+                                    className="font-medium text-gray-900 hover:text-gray-700"
+                                  >
+                                    Boost your conversion rate
+                                  </a>
+                                </li>
+                                <li className="text-base truncate">
+                                  <a
+                                    href="#"
+                                    className="font-medium text-gray-900 hover:text-gray-700"
+                                  >
+                                    How to use search engine optimization to
+                                    drive traffic to your site
+                                  </a>
+                                </li>
+                                <li className="text-base truncate">
+                                  <a
+                                    href="#"
+                                    className="font-medium text-gray-900 hover:text-gray-700"
+                                  >
+                                    Improve your customer experience
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div className="mt-5 text-sm">
                               <a
                                 href="#"
-                                className="font-medium text-gray-900 hover:text-gray-700"
+                                className="font-medium text-indigo-600 hover:text-indigo-500"
                               >
-                                Boost your conversion rate
+                                {' '}
+                                View all posts <span aria-hidden="true">→</span>
                               </a>
-                            </li>
-                            <li className="text-base truncate">
-                              <a
-                                href="#"
-                                className="font-medium text-gray-900 hover:text-gray-700"
-                              >
-                                How to use search engine optimization to drive
-                                traffic to your site
-                              </a>
-                            </li>
-                            <li className="text-base truncate">
-                              <a
-                                href="#"
-                                className="font-medium text-gray-900 hover:text-gray-700"
-                              >
-                                Improve your customer experience
-                              </a>
-                            </li>
-                          </ul>
+                            </div>
+                          </div>
                         </div>
-                        <div className="mt-5 text-sm">
-                          <a
-                            href="#"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                          >
-                            {' '}
-                            View all posts <span aria-hidden="true">→</span>
-                          </a>
-                        </div>
                       </div>
-                    </div>
-                  </div>
+                    }
+                  </Transition>
                 </div>
               </div>
             </div>
@@ -405,59 +417,69 @@ const Navbar = () => {
         </div>
       </div>
       {/* เมนูโหมด Mobile */}
-      <div
-        className={`${isMobileOn ? 'sm:hidden block' : 'sm:hidden hidden'}`}
-        id="mobile-menu"
+      <Transition
+        show={isMobileOn}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
       >
-        <div className="px-2 pt-2 pb-3 space-y-1">
-          <NavLink
-            to="/"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/about"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            About
-          </NavLink>
-          <NavLink
-            to="/teams"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Teams
-          </NavLink>
-          <NavLink
-            to="/projects"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Projects
-          </NavLink>
-          <button
-            type="button"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 inline-flex rounded-md text-sm font-medium"
-            aria-expanded="false"
-            onClick={() => setIsOn(!isOn)}
-          >
-            <span>More</span>
-            <svg
-              className="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+        <div
+          className={`${isMobileOn ? 'sm:hidden block' : 'sm:hidden hidden'}`}
+          id="mobile-menu"
+        >
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            <NavLink
+              to="/"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 15l7-7 7 7"
-              />
-            </svg>
-          </button>
+              Home
+            </NavLink>
+            <NavLink
+              to="/about"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >
+              About
+            </NavLink>
+            <NavLink
+              to="/teams"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Teams
+            </NavLink>
+            <NavLink
+              to="/projects"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Projects
+            </NavLink>
+            <button
+              type="button"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 inline-flex rounded-md text-sm font-medium"
+              aria-expanded="false"
+              onClick={() => setIsOn(!isOn)}
+            >
+              <span>More</span>
+              <svg
+                className="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 15l7-7 7 7"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
+      </Transition>
     </nav>
   );
 };
